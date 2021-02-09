@@ -35,6 +35,8 @@ end
 
 group :development do
 gem "capistrano"
+  gem "ed25519"
+  gem "bcrypt_pbkdf"
   gem "capistrano-rvm"
   gem "capistrano-rails"
   gem "capistrano3-puma", github: "seuros/capistrano-puma"

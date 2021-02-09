@@ -73,6 +73,7 @@ GEM
       public_suffix (>= 2.0.2, < 5.0)
     airbrussh (1.4.0)
       sshkit (>= 1.6.1, != 1.7.0)
+    bcrypt_pbkdf (1.1.0)
     bindex (0.8.1)
     bootsnap (1.7.2)
       msgpack (~> 1.0)
@@ -106,6 +107,7 @@ GEM
     childprocess (3.0.0)
     concurrent-ruby (1.1.8)
     crass (1.0.6)
+    ed25519 (1.2.4)
     erubi (1.10.0)
     ffi (1.14.2)
     globalid (0.4.2)
@@ -238,6 +240,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  bcrypt_pbkdf
   bootsnap (>= 1.4.4)
   byebug
   capistrano
@@ -247,6 +250,7 @@ DEPENDENCIES
   capistrano-upload-config
   capistrano3-puma!
   capybara (>= 3.26)
+  ed25519
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg (~> 1.1)
