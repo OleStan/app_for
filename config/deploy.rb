@@ -19,6 +19,21 @@ namespace :deploy do
   before 'check:linked_files', 'config:push'
   before 'check:linked_files', 'puma:jungle:setup'
   before 'check:linked_files', 'puma:nginx_config'
+  
+   namespace :assets do
+    task :precompile, :roles => :web, :except => { :no_release => true } do
+      begin
+        from = source.next_revision(current_revision) # <-- Fail here at first-time deploy because of current/REVISION absence
+      rescue
+        err_no = true
+      end
+      if err_no || capture("cd #{latest_release} && #{source.local.log(from)} vendor/assets/ app/assets/ | wc -l").to_i > 0
+        run %Q{cd #{latest_release} && #{rake} RAILS_ENV=#{rails_env} #{asset_env} assets:precompile}
+      else
+        logger.info "Skipping asset pre-compilation because there were no asset changes"
+      end
+   end
+  end
 end
 after "deploy:finished", "nginx:restart"
 after "deploy:finished", "puma:start"
